@@ -47,7 +47,7 @@ class Usuario {
     }
     private function validaSenha(string $senha) : void
     {
-        //retira caracteres como espaços,caracteres como quebra de linha e o tab do inicio e fim da string = trim().
+        //retira caracteres como espaços do inicio e fim da string = trim().
         $tamanhoSenha = strlen(trim($senha));
 
         if($tamanhoSenha > 6) {
