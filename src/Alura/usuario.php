@@ -2,13 +2,29 @@
 
 namespace  App\Alura;
 
-class Usuario {
+class Usuario
+{
     private $nome;
     private $sobrenome;
     private $senha;
+    private $tratamento;
 
-    public function __constructor (string $nome, string $senha) {
+    public function __constructor (string $nome, string $senha, string $genero) {
         $this->setNomeSobrenome($nome);
+        $this->validaSenha($senha);
+
+        $this->adicionarTratamentoAoSobrenome($nome, $genero);
+    }
+
+    private function adicionarTratamentoAoSobrenome(string $nome, string $genero)
+    {
+        if($genero === 'M') {
+//          funcao usada para encontrar substituicao e substituir por outra expressao
+            $this->tratamento = preg_replace('/(\w+)\b/', 'Sr.', $nome, 1);
+        }
+        if($genero === 'F') {
+            $this->tratamento = preg_replace('/(\w+)\b/', 'Sra.', $nome, 1);
+        }
     }
 
     private function setNomeSobrenome(string $nome)
@@ -56,6 +72,9 @@ class Usuario {
             $this->senha = "Senha inválida";
         }
     }
-
+    public function getTratamento(string $tratamento)
+    {
+        return $this->tratamento;
+    }
 }
 
